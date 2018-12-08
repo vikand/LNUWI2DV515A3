@@ -1,0 +1,50 @@
+﻿@page
+@model SearchEngine.WebApp.Pages.SearchModel
+
+<h2>Search</h2>
+
+<form method="post">
+
+    <div class="form-group">
+        <label for="SearchQuery">Search Wikipedia articles:</label>
+        <input asp-for="SearchQuery" class="form-control" placeholder="Specify required words (separated by a space)" />
+    </div>
+
+    <div class="form-group">
+        <div class="checkbox">
+            <label><input asp-for="ApplyPageRanking" type="checkbox">Apply page ranking</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+
+    <p class="waiter">
+        Searching. Please wait...&nbsp;&nbsp;&nbsp;<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    </p>
+
+</form>
+
+@if (Model.ScoredPages != null)
+{
+    <hr />
+    <p>
+        Duration: @(Model.Duration)
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Url</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rankedPage in Model.ScoredPages)
+            {
+                <tr>
+                    <td>@rankedPage.Url</td>
+                    <td>@Math.Round(rankedPage.Score, 2).ToString("0.00")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

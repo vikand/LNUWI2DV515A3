@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\wikipedia.pagerank.test\**" />
+    <Compile Remove="Data\wikipedia\**" />
+    <Content Remove="Data\wikipedia.pagerank.test\**" />
+    <Content Remove="Data\wikipedia\**" />
+    <EmbeddedResource Remove="Data\wikipedia.pagerank.test\**" />
+    <EmbeddedResource Remove="Data\wikipedia\**" />
+    <None Remove="Data\wikipedia.pagerank.test\**" />
+    <None Remove="Data\wikipedia\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SearchEngine.Entities\SearchEngine.Entities.csproj" />
+    <ProjectReference Include="..\SearchEngine.Lib\SearchEngine.Lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\wikipedia.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
