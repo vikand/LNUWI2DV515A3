@@ -78,7 +78,7 @@ namespace SearchEngine.WebApi.Repositories
             using (var zipArchiveHelper = zipArchiveHelperFactory.Create(zipArchivePath))
             {
                 var articles = zipArchiveHelper
-                    .GetEntries("^wikipedia/(Links|Words)/(Games|Programming)/[^/]+$")
+                    .GetEntries("^wikipedia/(Links|Words)/[^/]+/[^/]+$")
                     .Select(e => e.FullName.Substring(e.FullName.LastIndexOf('/') + 1))
                     .Distinct()
                     .OrderBy(a => a)
@@ -88,9 +88,9 @@ namespace SearchEngine.WebApi.Repositories
                 {
                     var escapedArticle = Regex.Escape(article);
                     var wordsEntry = zipArchiveHelper
-                        .GetEntry($"^wikipedia/Words/(Games|Programming)/{escapedArticle}$");
+                        .GetEntry($"^wikipedia/Words/[^/]+/{escapedArticle}$");
                     var linksEntry = zipArchiveHelper
-                        .GetEntry($"^wikipedia/Links/(Games|Programming)/{escapedArticle}$");
+                        .GetEntry($"^wikipedia/Links/[^/]+/{escapedArticle}$");
 
                     var page = new Page
                     {
